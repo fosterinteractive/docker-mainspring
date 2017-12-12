@@ -1,0 +1,4 @@
+#!/bin/sh
+
+curl -L https://github.com/drush-ops/drush/releases/download/${DRUSH_VERSION}/drush.phar -o /usr/local/bin/drush
+chmod +x /usr/local/bin/drush

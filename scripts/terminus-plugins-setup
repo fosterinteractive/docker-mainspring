@@ -1,0 +1,13 @@
+#!/bin/sh
+
+composer -n global require -n "hirak/prestissimo:^0.3"
+composer -n --working-dir=/usr/local/share require pantheon-systems/terminus "^1"
+
+mkdir -p $TERMINUS_PLUGINS_DIR
+composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-build-tools-plugin:^1
+composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-secrets-plugin:^1
+composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-rsync-plugin:^1
+composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-quicksilver-plugin:^1
+composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-composer-plugin:^1
+composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-drupal-console-plugin:^1
+composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-mass-update:^1
