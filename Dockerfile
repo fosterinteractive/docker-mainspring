@@ -4,7 +4,9 @@ RUN npm install -g gulp-cli
 
 FROM php:7.1-cli
 
-RUN apt-get update && apt-get install -y curl git subversion openssl zlib1g-dev
+RUN apt-get update && apt-get install -y curl git subversion openssl zlib1g-dev \
+  && echo "export PATH=~/.composer/vendor/bin:\$PATH" >> ~/.bash_profile \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN echo "memory_limit=-1" > "$PHP_INI_DIR/conf.d/memory-limit.ini" \
  && echo "date.timezone=${PHP_TIMEZONE:-UTC}" > "$PHP_INI_DIR/conf.d/date_timezone.ini"
