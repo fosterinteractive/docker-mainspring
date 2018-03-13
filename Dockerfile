@@ -4,7 +4,7 @@ RUN npm install -g gulp-cli
 
 FROM php:7.1-cli
 
-RUN apt-get update && apt-get install -y curl git subversion openssl zlib1g-dev \
+RUN apt-get update && apt-get install -y curl git subversion openssl zlib1g-dev php7.1-gd \
   && echo "export PATH=~/.composer/vendor/bin:\$PATH" >> ~/.bash_profile \
   && rm -rf /var/lib/apt/lists/*
 
