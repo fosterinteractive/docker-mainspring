@@ -4,14 +4,14 @@ RUN npm install -g gulp-cli
 
 FROM php:7.1-cli
 
-RUN apt-get update && apt-get install -y curl git subversion openssl zlib1g-dev php7.1-gd \
+RUN apt-get update && apt-get install -y curl git subversion openssl zlib1g-dev libpng-dev \
   && echo "export PATH=~/.composer/vendor/bin:\$PATH" >> ~/.bash_profile \
   && rm -rf /var/lib/apt/lists/*
 
 RUN echo "memory_limit=-1" > "$PHP_INI_DIR/conf.d/memory-limit.ini" \
  && echo "date.timezone=${PHP_TIMEZONE:-UTC}" > "$PHP_INI_DIR/conf.d/date_timezone.ini"
 
-RUN docker-php-ext-install zip
+RUN docker-php-ext-install zip gd
 
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /opt/yarn /opt/yarn
