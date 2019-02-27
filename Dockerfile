@@ -14,7 +14,7 @@ RUN echo "memory_limit=-1" > "$PHP_INI_DIR/conf.d/memory-limit.ini" \
 RUN docker-php-ext-install zip gd
 
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
-COPY --from=node /opt/yarn /opt/yarn
+COPY --from=node /usr/local/bin/yarn /opt/yarn
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 RUN cd /usr/local/bin; \
     ln -sf ../lib/node_modules/npm/bin/npm-cli.js npm; \

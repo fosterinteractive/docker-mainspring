@@ -4,7 +4,7 @@ COMPOSER_BIN_DIR=/usr/local/bin composer -n global require -n "hirak/prestissimo
 # Explicitly require symfony/process:^3 as a workaround until
 # https://github.com/pantheon-systems/terminus/issues/1808 is available
 # in a tagged release.
-COMPOSER_BIN_DIR=/usr/local/bin composer -n --working-dir=/usr/local/share require pantheon-systems/terminus "^2" symfony/process:^3
+COMPOSER_BIN_DIR=/usr/local/bin composer -n --working-dir=/usr/local/share require pantheon-systems/terminus "^1" symfony/process:^3
 
 mkdir -p $TERMINUS_PLUGINS_DIR
 composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-build-tools-plugin:^1
