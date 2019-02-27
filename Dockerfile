@@ -1,8 +1,8 @@
-FROM node:8 AS node
+FROM node:8.15 AS node
 
 RUN npm install -g gulp-cli
 
-FROM php:7.1-cli
+FROM php:7.2-cli
 
 RUN apt-get update && apt-get install -y curl git subversion openssl zlib1g-dev libpng-dev \
   && echo "export PATH=~/.composer/vendor/bin:\$PATH" >> ~/.bash_profile \
@@ -14,8 +14,13 @@ RUN echo "memory_limit=-1" > "$PHP_INI_DIR/conf.d/memory-limit.ini" \
 RUN docker-php-ext-install zip gd
 
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
-COPY --from=node /usr/local/bin/yarn /opt/yarn
+
+ENV YARN_VERSION 1.12.3
+
+COPY --from=node /opt/yarn-v$YARN_VERSION /opt/yarn
+
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+
 RUN cd /usr/local/bin; \
     ln -sf ../lib/node_modules/npm/bin/npm-cli.js npm; \
     ln -sf ../lib/node_modules/gulp-cli/bin/gulp.js gulp; \
@@ -30,6 +35,11 @@ ENV TERMINUS_PLUGINS_DIR /usr/local/share/terminus-plugins
 
 COPY scripts /tmp/scripts/
 
-RUN php /tmp/scripts/composer-setup --install-dir=/usr/local/bin --filename=composer; rm -f /tmp/setup
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && echo "export PATH=~/.composer/vendor/bin:\$PATH" >> ~/.bash_profile
+
+
+# RUN php /tmp/scripts/composer-setup --install-dir=/usr/local/bin --filename=composer; rm -f /tmp/setup
 RUN /tmp/scripts/drush-setup
 RUN /tmp/scripts/terminus-plugins-setup
