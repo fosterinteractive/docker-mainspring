@@ -35,7 +35,7 @@ ENV TERMINUS_PLUGINS_DIR /usr/local/share/terminus-plugins
 
 COPY scripts /tmp/scripts/
 
-RUN curl -sS https://getcomposer.org/installer | php \
+RUN curl -sS https://getcomposer.org/installer | php -- --version=1.10.22 \
     && mv composer.phar /usr/local/bin/composer \
     && echo "export PATH=~/.composer/vendor/bin:\$PATH" >> ~/.bash_profile
 
