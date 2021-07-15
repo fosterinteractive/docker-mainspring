@@ -64,7 +64,7 @@ ENV DRUSH_VERSION 8.4.8
 ENV TERMINUS_PLUGINS_DIR /usr/local/share/terminus-plugins
 
 # Copy our scripts folder into the tmp folder of this container.
-# COPY scripts /tmp/scripts/
+COPY scripts /tmp/scripts/
 
 # Install composer and add it's vendor bin folder to the exports path in the
 # bash file so we can execute the apps from cmd line.
