@@ -1,16 +1,13 @@
 #!/bin/sh
 
 COMPOSER_BIN_DIR=/usr/local/bin composer -n global require -n "hirak/prestissimo:^0.3"
-# Explicitly require symfony/process:^3 as a workaround until
-# https://github.com/pantheon-systems/terminus/issues/1808 is available
-# in a tagged release.
-COMPOSER_BIN_DIR=/usr/local/bin composer -n --working-dir=/usr/local/share require pantheon-systems/terminus "^2" symfony/process:^3
+COMPOSER_BIN_DIR=/usr/local/bin composer -n --working-dir=/usr/local/share require pantheon-systems/terminus "^2.4"
 
 mkdir -p $TERMINUS_PLUGINS_DIR
-composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-build-tools-plugin:2.*@beta
-composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-secrets-plugin:^1
-composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-rsync-plugin:^1
-composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-quicksilver-plugin:^1
-composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-composer-plugin:^1
-composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-drupal-console-plugin:^1
-composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-mass-update:^1
+composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-build-tools-plugin:^2
+composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-secrets-plugin:^1.3
+composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-rsync-plugin:^1.1
+composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-quicksilver-plugin:^1.3
+composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-composer-plugin:^1.1
+composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-drupal-console-plugin:^1.1
+composer -n create-project -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-mass-update:^1.1
