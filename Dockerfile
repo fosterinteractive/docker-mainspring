@@ -68,9 +68,9 @@ COPY scripts /tmp/scripts/
 
 # Install composer and add it's vendor bin folder to the exports path in the
 # bash file so we can execute the apps from cmd line.
-RUN curl -sS https://getcomposer.org/installer | php \
-  && mv composer.phar /usr/local/bin/composer \
-  && echo "export PATH=~/.composer/vendor/bin:\$PATH" >> ~/.bash_profile
+RUN curl -sS https://getcomposer.org/installer | php -- --version=1.10.22 \
+    && mv composer.phar /usr/local/bin/composer \
+    && echo "export PATH=~/.composer/vendor/bin:\$PATH" >> ~/.bash_profile
 
 # Run the drush setup script that will install drush.
 RUN /tmp/scripts/drush-setup
