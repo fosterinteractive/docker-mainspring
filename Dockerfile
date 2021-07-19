@@ -20,9 +20,6 @@ RUN apt-get update && apt-get install -y \
   libzip-dev \
   && rm -rf /var/lib/apt/lists/*
 
-# Add nano for debuging. Comment out when not needed.
-RUN apt-get update && apt-get -y install nano
-
 # Create seperate config.ini files for overriding the php settings to set the
 # php memory limit to no limit (needed for composer) and set the timezone to 
 # UTC if the PHP_TIMEZONE environment variable is undefined.
@@ -69,7 +66,7 @@ COPY scripts /tmp/scripts/
 
 # Install composer and add it's vendor bin folder to the exports path in the
 # bash file so we can execute the apps from cmd line.
-RUN curl -sS https://getcomposer.org/installer | php -- --version=1.10.22 \
+RUN curl -sS https://getcomposer.org/installer | php -- --version=2.1.3 \
     && mv composer.phar /usr/local/bin/composer \
     && echo "export PATH=~/.composer/vendor/bin:\$PATH" >> ~/.bash_profile
 
