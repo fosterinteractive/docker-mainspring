@@ -6,7 +6,7 @@ FROM node:14.17 AS node
 RUN npm install -g gulp-cli
 
 # Build stage using php image.
-FROM php:7.3-cli
+FROM php:7.4-cli
 
 # Install some needed packages then after install remove the cache files of
 # apt-get to save space.
@@ -58,7 +58,7 @@ RUN cd /usr/local/bin; \
 
 # Set some environment variables for composer and drush.
 ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV DRUSH_VERSION 8.4.8
+ENV DRUSH_VERSION 10.4.3
 ENV TERMINUS_PLUGINS_DIR /usr/local/share/terminus-plugins
 
 # Copy our scripts folder into the tmp folder of this container.
