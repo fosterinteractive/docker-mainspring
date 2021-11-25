@@ -1,4 +1,9 @@
 #!/bin/sh
 
-curl -L https://github.com/drush-ops/drush/releases/download/${DRUSH_VERSION}/drush.phar -o /usr/local/bin/drush
+mkdir -p /usr/local/share/drush
+/usr/bin/env composer -n --working-dir=/usr/local/share/drush require drush/drush:${DRUSH_VERSION}
+ln -fs /usr/local/share/drush/vendor/drush/drush/drush /usr/local/bin/drush
 chmod +x /usr/local/bin/drush
+
+# curl -L https://github.com/drush-ops/drush/releases/download/${DRUSH_VERSION}/drush.phar -o /usr/local/bin/drush
+# chmod +x /usr/local/bin/drush
