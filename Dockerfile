@@ -6,7 +6,7 @@ FROM node:14.17 AS node
 RUN npm install -g gulp-cli
 
 # Build stage using php image.
-FROM php:7.4-cli
+FROM php:8.1-cli
 
 # Install some needed packages then after install remove the cache files of
 # apt-get to save space.
