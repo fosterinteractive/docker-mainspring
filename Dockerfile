@@ -59,7 +59,7 @@ RUN cd /usr/local/bin; \
 # Set some environment variables for composer and drush.
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV DRUSH_VERSION 10.4.3
-ENV TERMINUS_PLUGINS_DIR /usr/local/share/terminus-plugins
+# ENV TERMINUS_PLUGINS_DIR /usr/local/share/terminus-plugins
 
 # Copy our scripts folder into the tmp folder of this container.
 COPY scripts /tmp/scripts/

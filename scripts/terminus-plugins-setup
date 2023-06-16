@@ -1,13 +1,38 @@
 #!/bin/sh
 
-COMPOSER_BIN_DIR=/usr/local/bin composer -n global require -n "hirak/prestissimo:^0.3"
-COMPOSER_BIN_DIR=/usr/local/bin composer -n --working-dir=/usr/local/share require pantheon-systems/terminus "^2.4"
+mkdir -p ~/terminus && cd ~/terminus
+curl -L https://github.com/pantheon-systems/terminus/releases/download/3.2.0/terminus.phar --output terminus
+chmod +x terminus
+# ./terminus self:update
+ln -s ~/terminus/terminus /usr/local/bin/terminus
 
-mkdir -p $TERMINUS_PLUGINS_DIR
-composer -n create-project --no-dev -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-build-tools-plugin:2.0.4
-composer -n create-project --no-dev -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-secrets-plugin:^1.3
-composer -n create-project --no-dev -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-rsync-plugin:^1.1
-composer -n create-project --no-dev -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-quicksilver-plugin:^1.3
-composer -n create-project --no-dev -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-composer-plugin:^1.1
-composer -n create-project --no-dev -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-drupal-console-plugin:^1.1
-composer -n create-project --no-dev -d $TERMINUS_PLUGINS_DIR pantheon-systems/terminus-mass-update:^1.1
+mkdir -p ~/plugins && cd ~/plugins
+
+curl -L https://github.com/pantheon-systems/terminus-build-tools-plugin/archive/refs/tags/3.0.6.tar.gz | tar -C ~/plugins -xvz
+terminus self:plugin:install ~/plugins/terminus-build-tools-plugin-3.0.6
+
+curl -L https://github.com/pantheon-systems/terminus-secrets-plugin/archive/refs/tags/1.3.1.tar.gz | tar -C ~/plugins -xvz
+terminus self:plugin:install ~/plugins/terminus-secrets-plugin-1.3.1
+
+curl -L https://github.com/pantheon-systems/terminus-rsync-plugin/archive/refs/tags/1.1.0.tar.gz | tar -C ~/plugins -xvz
+terminus self:plugin:install ~/plugins/terminus-rsync-plugin-1.1.0
+
+curl -L https://github.com/pantheon-systems/terminus-quicksilver-plugin/archive/refs/tags/1.3.0.tar.gz | tar -C ~/plugins -xvz
+terminus self:plugin:install ~/plugins/terminus-quicksilver-plugin-1.3.0
+
+curl -L https://github.com/pantheon-systems/terminus-composer-plugin/archive/refs/tags/1.1.0.tar.gz | tar -C ~/plugins -xvz
+terminus self:plugin:install ~/plugins/terminus-composer-plugin-1.1.0
+
+curl -L https://github.com/pantheon-systems/terminus-drupal-console-plugin/archive/refs/tags/1.1.0.tar.gz | tar -C ~/plugins -xvz
+terminus self:plugin:install ~/plugins/terminus-drupal-console-plugin-1.1.0
+
+curl -L https://github.com/pantheon-systems/terminus-mass-update/archive/1.x.tar.gz | tar -C ~/plugins -xvz
+terminus self:plugin:install ~/plugins/terminus-mass-update-1.x
+
+# terminus self:plugin:install pantheon-systems/terminus-build-tools-plugin
+# terminus self:plugin:install pantheon-systems/terminus-secrets-manager-plugin
+# terminus self:plugin:install pantheon-systems/terminus-rsync-plugin
+# terminus self:plugin:install pantheon-systems/terminus-quicksilver-plugin
+# terminus self:plugin:install pantheon-systems/terminus-composer-plugin
+# terminus self:plugin:install pantheon-systems/terminus-drupal-console-plugin
+# terminus self:plugin:install pantheon-systems/terminus-mass-update
